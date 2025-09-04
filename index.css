@@ -1,0 +1,283 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 1em;
+  background-color: #38383e;
+  color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+}
+
+#controls-form {
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+fieldset {
+    border: 1px solid #4a4a50;
+    border-radius: 8px;
+    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+}
+
+fieldset:disabled {
+    opacity: 0.5;
+}
+
+legend {
+    padding: 0 0.5em;
+    font-weight: bold;
+}
+
+#controls-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75em;
+    border-radius: 8px;
+    border: 1px solid #4a4a50;
+    background-color: #2c2c31;
+    color: #f0f0f0;
+    font-family: inherit;
+    font-size: 1em;
+    resize: vertical;
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    justify-content: center;
+}
+
+.radio-group label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+#controls-form button {
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#controls-form button[type="submit"] {
+    background-color: #8ab4f8;
+    color: #202124;
+}
+
+#controls-form button[type="submit"]:hover {
+    background-color: #a1c2fa;
+}
+
+#clear-btn {
+    background-color: #4a4a50;
+    color: #f0f0f0;
+}
+
+#clear-btn:hover {
+    background-color: #5a5a60;
+}
+
+#image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 6px;
+  width: 100%;
+}
+
+#image-gallery.loading::before {
+    content: 'Loading...';
+    color: #f0f0f0;
+    font-size: 1.5em;
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / -1; /* Span all columns */
+}
+
+.image-container {
+    position: relative;
+    line-height: 0; /* Removes bottom space under image */
+}
+
+#image-gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 6px solid #4a4a50;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.download-btn {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(44, 44, 49, 0.85);
+    color: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: 1px solid #4a4a50;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.image-container:hover .download-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Image Upload & Drop Zone Styles --- */
+#image-upload-fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.drop-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2em;
+    border: 2px dashed #4a4a50;
+    border-radius: 8px;
+    background-color: #2c2c31;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#drop-zone.dragover, .drop-zone.dragover {
+    background-color: #3c3c41;
+    border-color: #8ab4f8;
+}
+
+#drop-zone p, .drop-zone p {
+    margin: 0;
+}
+.drop-zone-or {
+    font-style: italic;
+    margin: 0.5em 0 !important;
+}
+
+.image-preview-container {
+    position: relative;
+    max-width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #4a4a50;
+}
+
+#image-preview, .image-preview-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: 1px solid #4a4a50;
+    border-radius: 8px;
+    background-color: #3c3c41;
+    color: #f0f0f0;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    margin-top: 0.5em;
+}
+
+#drop-zone:hover .upload-btn, .drop-zone:hover .upload-btn {
+    background-color: #4a4a50;
+}
+
+/* Face Swap Specific Styles */
+#face-swap-fieldset {
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+}
+
+.face-swap-uploader {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.face-swap-uploader h3 {
+    margin: 0 0 0.5em 0;
+    text-align: center;
+}
+
+#face-swap-fieldset .image-preview-container {
+    max-width: 150px; /* Smaller previews for side-by-side view */
+}
+
+#face-swap-fieldset .drop-zone {
+    padding: 1em; /* More compact drop zone */
+}
+#face-swap-fieldset .drop-zone p {
+    font-size: 0.9em;
+}

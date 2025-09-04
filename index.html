@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen API Demo</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@1.0.0"
+        }
+      }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Imagen API Demo</h1>
+    </header>
+    <main>
+        <form id="controls-form" aria-label="Image generation controls">
+            <fieldset id="prompt-fieldset">
+                <legend>Prompt</legend>
+                <textarea id="prompt-input" name="prompt" rows="5" placeholder="Describe the image you want to create..."></textarea>
+            </fieldset>
+            <fieldset>
+                <legend>Mode</legend>
+                <div class="radio-group">
+                    <label><input type="radio" name="mode" value="text-to-image" checked> Text-to-Image Generation</label>
+                    <label><input type="radio" name="mode" value="image-edit"> Image Editing</label>
+                    <label><input type="radio" name="mode" value="image-upscale"> Image Upscaling</label>
+                    <label><input type="radio" name="mode" value="face-swap"> Face Swap</label>
+                </div>
+            </fieldset>
+            <fieldset id="image-upload-fieldset">
+                <legend>Upload Image</legend>
+                <div id="image-preview-container" class="hidden">
+                    <img id="image-preview" src="#" alt="Image Preview"/>
+                    <button type="button" id="remove-image-btn" aria-label="Remove image">&times;</button>
+                </div>
+                <div id="drop-zone-wrapper">
+                    <label for="image-upload-input" id="drop-zone">
+                        <p>Drag & drop image here</p>
+                        <p class="drop-zone-or">or</p>
+                        <div class="upload-btn">Choose Image</div>
+                    </label>
+                    <input type="file" id="image-upload-input" accept="image/*" style="display: none;">
+                </div>
+            </fieldset>
+            <fieldset id="face-swap-fieldset" class="hidden">
+                <legend>Face Swap Images</legend>
+                <div class="face-swap-uploader">
+                    <h3>Source Face</h3>
+                    <div id="source-image-preview-container" class="hidden image-preview-container">
+                        <img id="source-image-preview" src="#" alt="Source Face Preview"/>
+                        <button type="button" id="remove-source-image-btn" class="remove-image-btn" aria-label="Remove source image">&times;</button>
+                    </div>
+                    <div id="source-drop-zone-wrapper">
+                        <label for="source-image-upload-input" class="drop-zone">
+                            <p>Drop source face</p>
+                            <span class="upload-btn">Choose</span>
+                        </label>
+                        <input type="file" id="source-image-upload-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="face-swap-uploader">
+                    <h3>Target Image</h3>
+                     <div id="target-image-preview-container" class="hidden image-preview-container">
+                        <img id="target-image-preview" src="#" alt="Target Image Preview"/>
+                        <button type="button" id="remove-target-image-btn" class="remove-image-btn" aria-label="Remove target image">&times;</button>
+                    </div>
+                    <div id="target-drop-zone-wrapper">
+                        <label for="target-image-upload-input" class="drop-zone">
+                            <p>Drop target image</p>
+                            <span class="upload-btn">Choose</span>
+                        </label>
+                        <input type="file" id="target-image-upload-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="negative-prompt-fieldset">
+                <legend>Negative Prompt</legend>
+                <textarea id="negative-prompt-input" name="negative-prompt" rows="2" placeholder="Describe what you DON'T want to see..."></textarea>
+            </fieldset>
+            <fieldset id="aspect-ratio-fieldset">
+                <legend>Aspect Ratio</legend>
+                <div class="radio-group">
+                    <label><input type="radio" name="aspectRatio" value="1:1" checked> 1:1</label>
+                    <label><input type="radio" name="aspectRatio" value="3:4"> 3:4</label>
+                    <label><input type="radio" name="aspectRatio" value="4:3"> 4:3</label>
+                    <label><input type="radio" name="aspectRatio" value="16:9"> 16:9</label>
+                </div>
+            </fieldset>
+            <fieldset id="style-fieldset">
+                <legend>Style</legend>
+                <div class="radio-group">
+                    <label><input type="radio" name="imageStyle" value="" checked> None</label>
+                    <label><input type="radio" name="imageStyle" value="Photographic"> Photographic</label>
+                    <label><input type="radio" name="imageStyle" value="Cinematic"> Cinematic</label>
+                    <label><input type="radio" name="imageStyle" value="Digital Art"> Digital Art</label>
+                    <label><input type="radio" name="imageStyle" value="Anime"> Anime</label>
+                </div>
+            </fieldset>
+            <div class="button-group">
+                <button type="submit">Generate Images</button>
+                <button type="button" id="clear-btn">Clear</button>
+            </div>
+        </form>
+        <div id="image-gallery" role="status" aria-live="polite"></div>
+    </main>
+    <script type="module" src="index.tsx"></script>
+</body>
+</html>
